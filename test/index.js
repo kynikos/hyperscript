@@ -1,4 +1,5 @@
-global.document = require('html-element').document;
+var JSDOM = require('jsdom').JSDOM
+global.document = (new JSDOM()).window.document
 
 var test = require('tape')
 var h    = require('../')
@@ -135,12 +136,12 @@ test('context cleanup removes observable listeners', function(t){
   var className = o()
   className('para')
   var p = _h('p', {style: {color: color}, className: className}, text)
-  t.equal(p.outerHTML, '<p style=\"color: red; \" class=\"para\">hello</p>')
+  t.equal(p.outerHTML, '<p style=\"color: red;\" class=\"para\">hello</p>')
   _h.cleanup()
   color('blue')
   text('world')
   className('section')
-  t.equal(p.outerHTML, '<p style=\"color: red; \" class=\"para\">hello</p>')
+  t.equal(p.outerHTML, '<p style=\"color: red;\" class=\"para\">hello</p>')
   t.end()
 })
 

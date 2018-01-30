@@ -1,7 +1,15 @@
 var split = require('browser-split')
 var ClassList = require('class-list')
 
-var w = typeof window === 'undefined' ? require('html-element') : window
+var w
+if (typeof window === 'undefined') {
+  // jsdom is an optional dependency, let this raise an exception if it's not
+  // installed, there's nothing we can do otherwise
+  var JSDOM = require('jsdom').JSDOM
+  w = (new JSDOM()).window
+} else {
+  w = window
+}
 var document = w.document
 var Text = w.Text
 
@@ -156,5 +164,3 @@ function forEach (arr, fn) {
 function isArray (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]'
 }
-
-

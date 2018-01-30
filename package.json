@@ -16,11 +16,13 @@
   },
   "dependencies": {
     "browser-split": "0.0.0",
-    "class-list": "~0.1.0",
-    "html-element": "^2.0.0"
+    "class-list": "~0.1.0"
+  },
+  "optionalDependencies": {
+    "jsdom": "^11.6.2"
   },
   "browser": {
-    "html-element": false
+    "jsdom": false
   },
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
